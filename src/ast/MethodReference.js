@@ -44,7 +44,7 @@ function createNode(nullSafeNavigation, methodName, position, args) {
 
         //handle safe navigation
         function maybeHandleNullSafeNavigation(member) {
-            if (member === undefined || member === null) {
+            if (member === undefined) {
                 if (nullSafeNavigation) {
                     return null;
                 }

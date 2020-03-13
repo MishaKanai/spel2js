@@ -146,17 +146,8 @@ describe("spel expression evaluator", () => {
 
             it("should return null instead of throw error when using safe navigation", () => {
                 //when
-                let willThrow = () => {
-                    evaluator.eval("nested.doesNotExist");
-                };
-                let willBeNull = evaluator.eval(
-                    "nested?.doesNotExist",
-                    context
-                );
-                let willAlsoBeNull = evaluator.eval(
-                    "nested?.doesNotExist?.definitelyDoesNotExist",
-                    context
-                );
+                let willThrow = ()=>{evaluator.eval('nested.doesNotExist');};
+                let willBeNull = evaluator.eval('nested?.doesNotExist', context);
 
                 //then
                 expect(willThrow).toThrow();
