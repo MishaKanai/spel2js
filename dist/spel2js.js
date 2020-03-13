@@ -2636,7 +2636,7 @@ function createNode(nullSafeNavigation, methodName, position, args) {
 
         //handle safe navigation
         function maybeHandleNullSafeNavigation(member) {
-            if (member === undefined || member === null) {
+            if (member === undefined) {
                 if (nullSafeNavigation) {
                     return null;
                 }
@@ -2731,17 +2731,13 @@ function createNode(nullSafeNavigation, propertyName, position) {
         var context = state.activeContext.peek();
 
         if (!context) {
-            if (nullSafeNavigation) {
-                return null;
-            }
-
             throw {
                 name: 'ContextDoesNotExistException',
                 message: 'Attempting to look up property \'' + propertyName + '\' for an undefined context.'
             };
         }
 
-        if (context[propertyName] === undefined || context[propertyName] === null) {
+        if (context[propertyName] === undefined) {
             //handle safe navigation
             if (nullSafeNavigation) {
                 return null;
