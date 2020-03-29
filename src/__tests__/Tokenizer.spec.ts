@@ -1,6 +1,5 @@
 import { Tokenizer } from "../Tokenizer";
-import { TokenKind as _TokenKind } from "../TokenKind";
-const TokenKind: any = _TokenKind;
+import { TokenKind } from "../TokenKind";
 
 describe("tokenizer", () => {
   let tokenize = Tokenizer.tokenize;
@@ -84,6 +83,17 @@ describe("tokenizer", () => {
     expect(tokens.length).toBe(1);
     expect(tokens[0].getKind()).toBe(TokenKind.LITERAL_REAL_FLOAT);
     expect(tokens[0].stringValue()).toBe("123.4f");
+  });
+  it("should return an array of one negative integer token", () => {
+    //when
+    let tokens = tokenize("-1");
+
+    //then
+    expect(tokens).toBeDefined();
+    expect(tokens.length).toBe(2);
+    expect(tokens[0].getKind()).toBe(TokenKind.MINUS);
+    expect(tokens[1].getKind()).toBe(TokenKind.LITERAL_INT);
+    expect(tokens[1].stringValue()).toBe("1");
   });
 
   //more complex expressions

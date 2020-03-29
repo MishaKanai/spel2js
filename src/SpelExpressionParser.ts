@@ -68,6 +68,7 @@ import { BeanReference } from "./ast/BeanReference";
 import { Identifier } from "./ast/Identifier";
 import { QualifiedIdentifier } from "./ast/QualifiedIdentifier";
 import { ConstructorReference } from "./ast/ConstructorReference";
+import { IToken } from "Token";
 
 export var SpelExpressionParser = function() {
   var VALID_QUALIFIED_ID_PATTERN = new RegExp("[\\p{L}\\p{N}_$]+");
@@ -78,10 +79,10 @@ export var SpelExpressionParser = function() {
   var constructedNodes = [];
 
   // The expression being parsed
-  var expressionString;
+  var expressionString: string;
 
   // The token stream constructed from that expression string
-  var tokenStream;
+  let tokenStream: IToken[];
 
   // length of a populated token stream
   var tokenStreamLength;
@@ -580,7 +581,14 @@ export var SpelExpressionParser = function() {
       var token = nextToken();
       if (peekTokenOne(TokenKind.RSQUARE)) {
         // looks like 'T]' (T is map key)
-        push(PropertyReference.create(token.stringValue(), toPosToken(token)));
+
+        // INVESTIGATE This doesn't match the signature!!! first arg is nullSafeNavigation
+        push(
+          PropertyReference.create(
+            token.stringValue() as any,
+            toPosToken(token)
+          )
+        );
         return true;
       }
       eatToken(TokenKind.LPAREN);
@@ -765,7 +773,7 @@ export var SpelExpressionParser = function() {
     }
     if (!qualifiedIdPieces.length) {
       if (node === null) {
-        raiseInternalException(expressionString.length(), "OOD");
+        raiseInternalException(expressionString.length, "OOD");
       }
       raiseInternalException(
         node.startPos,
@@ -836,7 +844,12 @@ export var SpelExpressionParser = function() {
       if (peekTokenOne(TokenKind.RSQUARE)) {
         // looks like 'NEW]' (so NEW used as map key)
         push(
-          PropertyReference.create(newToken.stringValue(), toPosToken(newToken))
+          // INVESTIGATE THIS:
+          // It doesn't match the signature of PropertyReference....
+          PropertyReference.create(
+            newToken.stringValue() as any,
+            toPosToken(newToken)
+          )
         );
         return true;
       }

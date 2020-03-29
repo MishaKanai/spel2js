@@ -21,7 +21,7 @@
  * @since 0.2.0
  */
 
-import { Token } from "./Token";
+import { Token, IToken } from "./Token";
 import { TokenKind } from "./TokenKind";
 
 var ALTERNATIVE_OPERATOR_NAMES = [
@@ -62,12 +62,12 @@ function init() {
 
 init();
 
-function tokenize(inputData) {
+function tokenize(inputData: string) {
   var expressionString = inputData,
     toProcess = inputData + "\0",
     max = toProcess.length,
     pos = 0,
-    tokens = [];
+    tokens: IToken[] = [];
 
   function process() {
     var ch;

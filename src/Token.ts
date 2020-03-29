@@ -22,7 +22,7 @@
 
 import { TokenKind } from "./TokenKind";
 import { Tokens, ITokenKind } from "TokenKind";
-interface IToken {
+export interface IToken {
   new (
     tokenKind: ITokenKind,
     tokenData: string,
@@ -35,11 +35,15 @@ interface IToken {
     startPos?: number,
     endPos?: number
   ): this;
-  getKind(): keyof Tokens;
+  startPos?: number;
+  data?: string;
+  endPos?: number;
+  getKind(): ITokenKind;
+  kind: ITokenKind;
   toString(): string;
   isIdentifier(): boolean;
   isNumericRelationalOperator(): boolean;
-  stringValue: string;
+  stringValue(): string;
   asInstanceOfToken(): IToken;
   asMatchesToken(): IToken;
   asBetweenToken(): IToken;
@@ -49,7 +53,7 @@ interface IToken {
 const Token: IToken = (() => {
   const _Token = function(
     tokenKind: ITokenKind,
-    tokenData: string,
+    tokenData?: string,
     startPos?: number,
     endPos?: number
   ) {
