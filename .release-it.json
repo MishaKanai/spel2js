@@ -3,7 +3,7 @@
   "dry-run": false,
   "verbose": true,
   "force": false,
-  "pkgFiles": ["package.json", "bower.json"],
+  "pkgFiles": ["package.json"],
   "increment": "patch",
   "prereleaseId": null,
   "commitMessage": "Bumped version to %s",
@@ -13,7 +13,7 @@
   "changelogCommand": "git log --pretty=format:'* %s (%h)' [REV_RANGE]",
   "requireCleanWorkingDir": false,
   "src": {
-    "pushRepo": "https://github.com/benmarch/spel2js.git",
+    "pushRepo": "https://github.com/mishakanai/spel2js.git",
     "beforeStartCommand": false,
     "beforeStageCommand": false,
     "afterReleaseCommand": false

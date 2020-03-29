@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "target": "es5",
+    "declaration": true,
+    "outDir": "./lib",
+    "lib": ["esnext"],
+    "skipLibCheck": true,
+    "esModuleInterop": true
+  },
+  "exclude": ["src/**/*.spec.ts"],
+  "include": ["src/**/*"],
+  "awesomeTypescriptLoaderOptions": {
+    "declaration": false
+  }
+}
